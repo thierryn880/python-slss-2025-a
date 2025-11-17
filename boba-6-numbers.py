@@ -80,45 +80,90 @@ def vote_listed_choices():
     print(f"Spoiled votes: {spoiled_votes / total * 100} votes")
 
 
-def main():
-    vote_listed_choices()
-    chip_rater()
-
-
-if __name__ == "__main__":
-    main()
-
-
 # version2
 # ask user for favourite boba place
 # keep tally
 # data analysis
 # give raw scores
 # give socres as a percentage
+def vote_open_choice():
+    """Keeps track dynamically of user's choice.
+    Note: choices must match text exactly (case is not sensitive)"""
+
+    votes = {}  # holds vote information    key     -> value
+    #                           place   -> num votes
+
+    for _ in range(NUM_VOTERS):
+        # Ask the user what their fave
+        os.system("clear")
+        cur_vote = (
+            input("What's your favourite local bubbble tea cafe? ")
+            .lower()
+            .strip(",.?! ")
+        )
+
+        # Checks if current place is in the votes dictionary
+        # If it doesn't exist, initialize the key-value pair
+        if cur_vote not in votes:
+            votes[cur_vote] = 1
+        else:
+            votes[cur_vote] += 1
+
+    # Print the results
+    print("-------------------------------------")
+    print("Results:")
+
+    # By default, iterating over a dictionary gives you the keys
+    for place in votes:
+        # Print the raw score and percentage for each key in the dictionary
+        percentage = votes[place] / NUM_VOTERS * 100
+
+        print(
+            f"{place.capitalize()} votes: {votes[place]} | percentage: {percentage}% of the vote"
+        )
+
+    print("-------------------------------------")
+
+
 def chip_rater():
-    """help gather data about chp crispness and quality"""
+    """Help gather data about chip crispness
+    and quality."""
+    questions = [
+        "How cripsy is the chip out of 5? 0 is mushy, 5 is super crisp.",
+        "How would you rate the taste out of 5? 0 is unpalatable, 5 is gourmet.",
+        "How fresh would you rate the chip out of 5? 0 is stale, 5 is pristine.",
+        "How would you rate the size of the chip out of 5?",
+    ]
 
+    # Bucket to hold total ratings
+    total_ratings = 0
 
-questions = [
-    "how crispy is the chip out of 5. 0 is mushy, 5 is super crisp",
-    "how woud you rate the taste out of 5 . 0 is buns, 5 is excellent",
-    "how fresh would you rate it out of 5. 0 is moldy, 5 is just made",
-]
-# bucket for ratings
-total_ratings = 0
-# give the test subject instuctions
-print("take one from the bag chip")
-print("eat it")
-print("give your rating.")
+    # Give the test subject instructions
+    print("Take one chip from the bag.")
+    print("Eat it mindfully.")
+    print("Give your rating.")
 
-# ask questions to subject
-for question in questions:
-    print(question)
-    # for each question
-    # get their rating out of 5
-    rating = input().strip(".,?!")
-    total_ratings += rating
+    # Ask questions to the subject
+    for question in questions:
+        print(question)
 
-    # print out the average out of 5
+        # get their rating for that question
+        # out of five
+        rating = int(input().strip(",.?! "))
+
+        total_ratings += rating
+
+    # Print out the average rating out of five
     average = total_ratings / len(questions)
-    print(f"Average rating: {average} out of 5")
+
+    print(f"The average rating is {average} *s!")
+
+
+def main():
+    vote_listed_choices()
+    chip_rater()
+    vote_open_choice()
+
+
+if __name__ == "__main__":
+    main()
