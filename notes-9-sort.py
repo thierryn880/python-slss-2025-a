@@ -1,5 +1,5 @@
 # Intro to Sort
-# Author: Ubial
+# Author: Thierry Narcisse
 # 4 December
 
 import csv
@@ -22,25 +22,75 @@ def selection_sort(l: list[int], ascending=True) -> list[int]:
         a sorted list"""
 
     num_items = len(l)
+    for i in range(num_songs):
 
-    # start at the beginning of the list
-    for i in range(num_items):
-        lowest_num = l[i]
-        lowest_index = i
+        candidate_val = helper_spotify.string_to_num(songs[i][col])
+        candidate_index = i
 
-        #  check rest of the list
-        for j in range(i + 1, num_items):
-            if l[j] < lowest_num:
-                lowest_num = l[j]
-                lowest_index = j
+        for j in range(i + 1, num_songs):
+            if ascending:
+             this_song_val = helper_spotify.string_to_num(songs[j][col])
+             if this_song_val < candidate_val
+                candidate_val = this_song_val
+                candidate_index = j
+        else:his_song_val < candidate_val
+        candidate_val = this_song_val
+        candidate_index = j
 
-        # swap current index with the lowest
-        l[i], l[lowest_index] = l[lowest_index], l[i]
+            # Get songs from an artist
 
-    return l
+            # Use Selection Sort to sort songs
+            # # Starting at the beginning of the list
+            # Set this value to the candidate's value
+            # Set this index to the candidate's index
+                # Check the rest of the list
+                # If ascending
+                    # If this value is lower than candidate
+                        # Set candidate val to this val
+                        # Set candidate idx to this idx
+                # If not ascending
+                    # If this val is higher than candidate
+                        # Set candidate val to this val
+                        # Set candidate idx to this idx
+
+
+    if ascending:
+        # start at the beginning of the list
+        for i in range(num_items):
+            candidate_num = l[i]
+            candidate_index = i
+
+            #  check rest of the list
+            for j in range(i + 1, num_items):
+                if ascending:
+                    if l[j] < candidate_num:
+                        candidate_num = l[j]
+                        candidate_index = j
+
+                else:
+                    if l[j] > candidate_num:
+                        candidate_num = l[j]
+                        candidate_index = j
+
+            # swap current index with the lowest
+            l[i], l[candidate_index] = l[candidate_index], l[i]
+
+        return l
+
+        def sort_songs(
+            songs: list[list[str]], col: int, ascending=True
+        ) -> list[list[str]]:
+            """Sort a list of spotify songs in place
+
+            Params:
+                songs - list of songs
+                col - column to sort
+                ascending - will sort ascending by default
+
+            Returns: sorted list"""
+
 
 
 if __name__ == "__main__":
-    sorted_list = selection_sort([1, 43, 55, -11, 100, 34])
-
-    print(sorted_list)
+    helper_spotify.songs_by_artist("data/spotify2024-day1")
+    taylors_songs = sort_songs("taylors_songs , 11, ascending=False")
