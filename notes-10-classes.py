@@ -3,6 +3,7 @@
 # dec 11 2025
 
 import random
+from ctypes import c_buffer
 
 
 class Pokemon:
@@ -10,7 +11,7 @@ class Pokemon:
         self.name = "Pikachu"
         self.species = "Pikachu"
         self.type = "Electric"
-        self.dance =
+        self.dance = 0
         self.age = 0
         self.level = 1
         print(f"{self.name} is born !")
@@ -33,6 +34,30 @@ class Pokemon:
         print(f"     age: {self.age}")
 
 
+class Charmander(Pokemon):
+    def __init__(self):
+        super().__init__()
+        self.name = "Charmander"
+        self.species = "Charmander"
+        self.type = "Fire"
+
+    def ember(self):
+        print(f"{self.name} used ember")
+
+
+class Squirtle(Pokemon):
+    def __init__(self):
+        super().__init__()
+        self.name = "Squirtle"
+        self.species = "Squirtle"
+        self.type = "water"
+        self.has_sun_glasses = True
+
+    def water_gun(self):
+        """use the water gun attack"""
+        print(f"{self.name} used water gun.")
+
+
 if __name__ == "__main__":
     pokemon_one = Pokemon()
     print("Pokemon Name:", pokemon_one.name)
@@ -51,8 +76,16 @@ if __name__ == "__main__":
         if type(pokemon_one) is Pokemon:
             print(f"{pokemon_one.name} is a Pokemon")
 
-
             if type(pokemon_two) is Pokemon:
                 print(f"{pokemon_two.name} is a Pokemon")
 
-    pokemon_one.talk
+    pokemon_one.stats()
+    pokemon_two.stats()
+
+    squirtle_one = Squirtle()
+    squirtle_one.talk()
+    squirtle_one.water_gun()
+
+charmander_one = Charmander()
+charmander_one.talk()
+charmander_one.ember()
