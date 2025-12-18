@@ -19,6 +19,7 @@ class Pokemon:
             self.shiny = False
         else:
             self.shiny = True
+            print(f"{self.name} is shiny!")
 
     def talk(self):
         """here what the pokemon has to say. The pokemon says its species name."""
